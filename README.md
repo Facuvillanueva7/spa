@@ -1,6 +1,6 @@
 # CV Interactivo con React
 
-Single Page Application creada con React y Vite que presenta el currículum de Laura Martínez de forma interactiva.
+Single Page Application creada con React y Vite que presenta el currículum de Facu Villanueva de forma interactiva.
 
 ## Scripts disponibles
 
