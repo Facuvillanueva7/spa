@@ -43,7 +43,7 @@ export default function App() {
     const element = document.createElement('a');
     const file = new Blob([profile.downloadableSummary], { type: 'text/plain' });
     element.href = URL.createObjectURL(file);
-    element.download = 'Laura-Martinez-CV.txt';
+    element.download = 'FacuVillanueva-CV.txt';
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
@@ -53,8 +53,8 @@ export default function App() {
     <div className={`app ${themeClass}`}>
       <header className="top-bar">
         <div className="top-bar__brand" onClick={() => handleScrollTo('sobre-mi')}>
-          <span className="top-bar__avatar">LM</span>
-          <span className="top-bar__name">Laura Martínez</span>
+          <span className="top-bar__avatar"><FV></FV></span>
+          <span className="top-bar__name">Facu Villanueva</span>
         </div>
         <nav className="top-bar__nav">
           {sections.map((section) => (
@@ -122,7 +122,7 @@ export default function App() {
       </main>
 
       <Footer
-        name="Laura Martínez"
+        name="Facu Villanueva"
         socialLinks={profile.contact.social}
         onNavigate={handleScrollTo}
         sections={sections}
