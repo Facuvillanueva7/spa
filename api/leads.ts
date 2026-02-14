@@ -1,0 +1,34 @@
+import { supabaseFetch } from './_supabase';
+
+function validEmail(value: string) {
+  return /^\S+@\S+\.\S+$/.test(value);
+}
+
+export default async function handler(req: any, res: any) {
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+
+  const { name, company, email, need, message, website } = req.body || {};
+
+  if (website) return res.status(200).json({ ok: true });
+  if (![name, company, email, need, message].every(Boolean)) {
+    return res.status(400).json({ error: 'Missing fields' });
+  }
+
+  if (!validEmail(email)) return res.status(400).json({ error: 'Invalid email' });
+
+  const row = {
+    name: String(name).trim(),
+    company: String(company).trim(),
+    email: String(email).trim().toLowerCase(),
+    need: String(need).trim(),
+    message: String(message).trim()
+  };
+
+  const response = await supabaseFetch('leads', {
+    method: 'POST',
+    body: JSON.stringify(row)
+  });
+
+  if (!response.ok) return res.status(500).json({ error: 'db_error' });
+  return res.status(200).json({ ok: true });
+}
