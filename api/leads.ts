@@ -1,4 +1,4 @@
-import { supabaseFetch } from './_supabase';
+import { supabase } from './_supabase.js';
 
 function validEmail(value: string) {
   return /^\S+@\S+\.\S+$/.test(value);
@@ -24,11 +24,8 @@ export default async function handler(req: any, res: any) {
     message: String(message).trim()
   };
 
-  const response = await supabaseFetch('leads', {
-    method: 'POST',
-    body: JSON.stringify(row)
-  });
+  const { error } = await supabase.from('leads').insert([row]);
 
-  if (!response.ok) return res.status(500).json({ error: 'db_error' });
+  if (error) return res.status(500).json({ error: 'db_error' });
   return res.status(200).json({ ok: true });
 }
